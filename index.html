@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Website</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+    </style>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <div id="loginPopup" class="popup">
+        <div class="popup-content">
+            <span class="close">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <button type="submit" id="b">Submit</button>
+            </form>
+        </div>
+    </div>
+    <section class="header">
+        <nav>
+            <img src="image-removebg-preview.png" id="logo">
+            <p class="lo" style="font-size: 22px;"><span style="color: crimson; font-size: 30px;">D</span>PS</p>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="gallery.html">ABOUT</a></li>
+                    <li><a href="clt.html">CONTACT</a></li>
+                    <select name="login" id="itemDropdown">
+                        <option value="" disabled selected>LOGIN</option>
+                        <option value="student-login.html">Student</option>
+                        <option value="teacher-login.html">Teacher</option>
+                        <option value="principal-login.html">Principal</option>
+                        <option value="superuser-login.html">Super User</option>
+                    </select>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="text-box">
+            <div class="img">
+                <img src="" id="img">
+            </div>
+            <div class="text">
+                <h1 style="font-size: 50px; margin: 0 0 50px 0;"><span style="color: crimson; font-size: 70px;">D</span>elhi Public School</h1>
+            <div class="sty">
+            <span id="element"></span>
+            </div>
+            <div class="para">
+            <p>Every day, we connect bright, curious students
+                 with oppurtunities that expand their vision and help them meet their greatest aspirations 
+                  so that they can lead positive change in the world.</p>
+            </div>
+            <div class="bt">
+            <a href="gallery.html" class="hero-btn">Visit us to know more</a>
+            </div>
+        </div>
+        </div>
+    </section>
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <script>
+        var typed = new Typed('#element', {
+            strings: ['Shaping Leaders,','Shaping Excellence','Shaping Leaders, Shaping Excellence'],
+            typeSpeed: 150,
+        });
+
+        var slide = ['WhatsApp Image 2024-05-25 at 09.11.55_2a8c4511.jpg', 'WhatsApp Image 2024-05-25 at 09.10.28_d4f005b8.jpg', 'WhatsApp Image 2024-05-25 at 09.10.17_116edae6.jpg', 'WhatsApp Image 2024-05-25 at 09.10.24_f668c6c0.jpg']
+
+        var start = 0
+        var imageduration = 2000
+
+        function slidershow() {
+            document.getElementById('img').src = slide[start]
+            start++
+            if (start == slide.length) {
+                start = 0
+            }
+            setTimeout("slidershow()", imageduration)
+        }
+        slidershow()
+
+        // Get the modal
+        var popup = document.getElementById('loginPopup');
+
+        // Get the button that opens the modal
+        var btn = document.getElementById('loginBtn');
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName('close')[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function () {
+            popup.style.display = 'flex';
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            popup.style.display = 'none';
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == popup) {
+                popup.style.display = 'none';
+            }
+        }
+
+        // Prevent form submission for demonstration purposes
+        document.getElementById('loginForm').onsubmit = function (event) {
+            event.preventDefault();
+            alert('Form submitted!');
+            popup.style.display = 'none';
+        }
+
+    </script>
+
+<script>
+    document.getElementById('itemDropdown').addEventListener('change', function () {
+        const selectedValue = this.value;
+
+        if (selectedValue) {
+            window.location.href = selectedValue;
+        }
+    });
+</script>
+
+</body>
+</html>
