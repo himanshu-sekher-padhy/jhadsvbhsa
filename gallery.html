@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="gallery.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+    </style>
+    <title>Gallery</title>
+</head>
+<body>
+    <nav>
+        <img src="image-removebg-preview.png" id="logo">
+        <p class="lo" style="font-size: 22px;"><span style="color: crimson; font-size: 30px;">D</span>PS</p>
+        <div class="nav-links">
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="superuser.html">ABOUT</a></li>
+                <li><a href="principal.html">CONTACT</a></li>
+                <select name="login" id="itemDropdown">
+                    <option value="" disabled selected>LOGIN</option>
+                    <option value="student-login.html">Student</option>
+                    <option value="teacher-login.html">Teacher</option>
+                    <option value="principal-login.html">Principal</option>
+                    <option value="superuser-login.html">Super User</option>
+                    <option value="parent-login.html">Parent</option>
+                </select>
+            </ul>
+        </div>
+    </nav>
+    <section class="header">
+        <div class="event">
+            <h3>NOTICE</h3>
+            <div class="text">
+                <div id="displayText"></div>
+            </div>
+        </div>
+        <div class="rgh">
+            <div class="sel">
+                <div class="slider">
+                    <div class="slides">
+                        <img src="19781.jpg" alt="Image 1">
+                        <img src="7291039.jpg" alt="Image 2">
+                        <img src="happy-children-school.jpg" alt="Image 3">
+                        <img src="little-kids-halloween-party.jpg" alt="Image 4">
+                    </div>
+                    <button class="prev" onclick="prevSlide()">&#10094;</button>
+                    <button class="next" onclick="nextSlide()">&#10095;</button>
+                </div>
+                <div class="rg">
+                    <h3 style="color: #fff;">OUR STARS</h3>
+                    <div class="card-container">
+                        <div class="card">
+                            <img src="WhatsApp Image 2024-05-28 at 09.49.41_3d1dcda0.jpg" alt="Image 1">
+                            <div class="card-text">
+                                <p>Riyan Upadhaya<br>Secured 99% in Matric .</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img src="WhatsApp Image 2024-05-28 at 09.49.42_8de6b19b.jpg" alt="Image 2">
+                            <div class="card-text">
+                                <p>Soumya Singh<br>Secured 98% in Intermidiate .</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="student">
+                <div class="contact-container">
+                    <h2>Contact Us</h2>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>Email: <a href="mailto:info@school.com">info@school.com</a></span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>Phone: <a href="tel:+1234567890">+1 (234) 567-890</a></span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Address: 123 School St, Education City, Country</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <span>Website: <a href="https://www.school.com" target="_blank">www.school.com</a></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="map">
+                    <p style="color: #fff; font-size: 20px; margin-bottom: 15px;">IN GOOGLE MAPS</p>
+                    <a href="https://maps.app.goo.gl/3fSSxGyg358oDHAA6"><img src="12540.png"></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- <script src="login.js"></script> -->
+
+    <script>
+        /* script.js */
+        let slideIndex = 0;
+        let slides = document.querySelector('.slides');
+        let images = document.querySelectorAll('.slides img');
+        let totalSlides = images.length;
+
+        function showSlide(index) {
+            slideIndex = (index + totalSlides) % totalSlides;
+            slides.style.transform = `translateX(${-slideIndex * 100}%)`;
+        }
+
+        function nextSlide() {
+            showSlide(slideIndex + 1);
+        }
+
+        function prevSlide() {
+            showSlide(slideIndex - 1);
+        }
+
+        let autoSlideInterval = setInterval(nextSlide, 3000);
+
+        function stopAutoSlide() {
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = setInterval(nextSlide, 3000);
+        }
+
+        document.querySelector('.next').addEventListener('click', () => {
+            stopAutoSlide();
+            nextSlide();
+        });
+
+        document.querySelector('.prev').addEventListener('click', () => {
+            stopAutoSlide();
+            prevSlide();
+        });
+
+        window.addEventListener('load', () => {
+            showSlide(slideIndex);
+        });
+
+        window.addEventListener('load', () => {
+            const displayText = document.getElementById('displayText');
+            const userTexts = JSON.parse(localStorage.getItem('userTexts')) || [];
+
+            if (userTexts.length > 0) {
+                userTexts.forEach((text, index) => {
+                    const textElement = document.createElement('p');
+                    textElement.textContent = `${index + 1}. ${text}`;
+                    displayText.appendChild(textElement);
+                });
+            } else {
+                displayText.textContent = 'No texts found. Please go to the input page and enter some text.';
+            }
+        });
+
+
+    </script>
+
+    <script>
+        document.getElementById('itemDropdown').addEventListener('change', function () {
+            const selectedValue = this.value;
+
+            if (selectedValue) {
+                window.location.href = selectedValue;
+            }
+        });
+    </script>
+
+</body>
+
+</html>
