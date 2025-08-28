@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="teacher-login.css">
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h1>Teacher Login</h1>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginName">Name:</label>
+                    <input type="text" id="loginName" name="name" required>
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="form-group">
+                    <label for="loginEmpId">Employee ID:</label>
+                    <input type="text" id="loginEmpId" name="empid" required>
+                    <i class="fas fa-id-card"></i>
+                </div>
+                <div class="form-group captcha-group">
+                    <img id="captchaImage" alt="Captcha">
+                    <input type="text" id="captchaInput" placeholder="Enter Captcha" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <div id="error-message" style="color: red;"></div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Array of captcha objects with image src and correct code
+            const captchas = [
+                { src: 'capcha1.png', code: 'WX8K' },
+                { src: 'capcha2.png', code: 'HP3E' },
+                { src: 'capcha3.png', code: '4MM8' },
+            ];
+
+            // Select a random captcha
+            const selectedCaptcha = captchas[Math.floor(Math.random() * captchas.length)];
+
+            // Set the captcha image and store the correct code
+            const captchaImage = document.getElementById('captchaImage');
+            captchaImage.src = selectedCaptcha.src;
+            captchaImage.dataset.captcha = selectedCaptcha.code; // Store correct code in a data attribute
+
+            document.getElementById('loginForm').addEventListener('submit', async function (event) {
+                event.preventDefault();
+
+                const name = document.getElementById('loginName').value;
+                const empid = document.getElementById('loginEmpId').value;
+                const captchaInput = document.getElementById('captchaInput').value;
+                const errorMessage = document.getElementById('error-message');
+
+                // Get the correct captcha value from the data attribute of the image
+                const captchaCorrect = captchaImage.dataset.captcha;
+
+                // Validate the captcha
+                if (captchaInput !== captchaCorrect) {
+                    errorMessage.textContent = 'Captcha code is incorrect. Please try again.';
+                    return;
+                }
+
+                try {
+                    const response = await fetch('http://localhost:3001/teacher-login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ name, empid })
+                    });
+
+                    if (response.ok) {
+                        const teacher = await response.json();
+                        // Redirect to teacher.html with the teacher ID as a query parameter
+                        window.location.href = `teacher.html?id=${teacher._id}`;
+                    } else {
+                        const errorData = await response.json();
+                        errorMessage.textContent = errorData.error || 'Invalid login credentials';
+                    }
+                } catch (error) {
+                    errorMessage.textContent = 'An error occurred. Please try again later.';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

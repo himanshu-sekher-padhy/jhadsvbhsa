@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="teacher.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+    </style>
+    <title>Teacher</title>
+</head>
+
+<body>
+    <nav>
+        <img src="image-removebg-preview.png" id="logo" alt="Logo">
+        <p class="lo" style="font-size: 22px;">
+            <span style="color: crimson; font-size: 30px;">D</span>PS
+        </p>
+        <div class="nav-links">
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="gallery.html">ABOUT</a></li>
+                <li><a href="principal.html">CONTACT</a></li>
+            </ul>
+        </div>
+    </nav>
+    <section class="header">
+        <div class="event">
+            <h3>TEACHER DETAILS</h3>
+            <div class="text">
+                <img src="" id="profile" alt="Profile Image">
+                <div class="labels">
+                    <label for="name">Name: <span id="teacherName"></span></label><br>
+                    <label for="empid">Employee ID: <span id="teacherEmpId"></span></label><br>
+                    <label for="cls_assign">Class Assigned: <span id="teacherClass"></span></label><br>
+                    <label for="phone">Phone: <span id="teacherPhone"></span></label>
+                </div>
+            </div>
+        </div>
+        <div class="parent" id="parent1">
+            <div class="det">
+                <div class="att" onclick="toggleDivs()">
+                    <div class="main-d">
+                        <p>Attendance Details</p>
+                        <img src="hand.png" alt="">
+                    </div>
+                    <div class="bottom">
+                        <p>More Info <i class="fa-solid fa-arrow-right"></i></p>
+                    </div>
+                </div>
+                <div class="mark" onclick="toggleDivs2()">
+                    <div class="main-d">
+                        <p>Marks</p>
+                        <img src="hat.png" alt="">
+                    </div>
+                    <div class="bottom">
+                        <p>More Info <i class="fa-solid fa-arrow-right"></i></p>
+
+                    </div>
+                </div>
+                <div class="ass" onclick="toggleDivs3()">
+                    <div class="main-d">
+                        <p>Assignment</p>
+                        <img src="book.png" alt="">
+                    </div>
+                    <div class="bottom">
+                        <p>More Info <i class="fa-solid fa-arrow-right"></i></p>
+                    </div>
+                </div>
+                <div class="add" onclick="toggleDivs4()">
+                    <div class="main-d">
+                        <p>Add Student</p>
+                        <img src="book.png" alt="">
+                    </div>
+                    <div class="bottom">
+                        <p>More Info <i class="fa-solid fa-arrow-right"></i></p>
+                    </div>
+                </div>
+            </div>
+            <div class="tab">
+                <div class="timetable-container">
+                    <h2><i class="fa fa-calendar"></i> Today's Time Table</h2>
+                    <div class="dropdown">
+                        <select id="select-day">
+                            <option value="" disabled selected>Select Day</option>
+                            <option value="monday">Monday</option>
+                            <option value="tuesday">Tuesday</option>
+                            <option value="wednesday">Wednesday</option>
+                            <option value="thursday">Thursday</option>
+                            <option value="friday">Friday</option>
+                            <option value="saturday">Saturday</option>
+                        </select>
+                    </div>
+                    <table class="timetable">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Type</th>
+                                <th>From Time</th>
+                                <th>To Time</th>
+                                <th>Day</th>
+                                <th>Faculty</th>
+                                <th>Location</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>ISC</td>
+                                <td>Theory</td>
+                                <td>8:00 AM</td>
+                                <td>9:00 AM</td>
+                                <td>Thursday</td>
+                                <td>MR. ASHUTOSH MALLIK</td>
+                                <td>RDB-08</td>
+                            </tr>
+                            <tr>
+                                <td>OS</td>
+                                <td>Theory</td>
+                                <td>9:00 AM</td>
+                                <td>10:00 AM</td>
+                                <td>Thursday</td>
+                                <td>Mr. Santosh Kumar Panda</td>
+                                <td>RDB-08</td>
+                            </tr>
+                            <tr>
+                                <td>EEC</td>
+                                <td>Theory</td>
+                                <td>12:20 PM</td>
+                                <td>1:20 PM</td>
+                                <td>Thursday</td>
+                                <td>P. NARASIMHA MURTY</td>
+                                <td>RDB-08</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="parent attendance" id="parent2" style="display: none;">
+            <div class="container">
+                <form id="attendance-form">
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" name="date" required>
+                    <table id="attendance-table">
+                        <thead>
+                            <tr>
+                                <th>Roll No.</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Attendance rows will be dynamically populated here -->
+                        </tbody>
+                    </table>
+                    <button type="button" onclick="saveAttendance()">Save Attendance</button>
+                </form>
+            </div>
+        </div>
+        <div class="parent attendance" id="parent3" style="display: none;">
+            <h2 style="color: #fff; margin: 30px 0 0 0;">Marks Details</h2>
+            <div class="sel">
+                <div class="ex">
+                    <label>Exam :</label>
+                    <select id="examType">
+                        <option value="classtest">Class Test</option>
+                        <option value="cycletest">Cycle Test</option>
+                    </select>
+                </div>
+            </div>
+            <table id="marksTable">
+                <thead>
+                    <tr>
+                        <th>Roll Number</th>
+                        <th>Mark</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Marks rows will be dynamically populated here -->
+                </tbody>
+            </table>
+            <button onclick="saveMarks()" class="but">Save Marks</button>
+        </div>
+        <div class="parent attendance" id="parent4" style="display: none;">
+            <h2>It is Assignment .</h2>
+        </div>
+        <div class="parent attendance" id="parent5" style="display: none;">
+            <div class="container">
+                <h1>Teacher Dashboard</h1>
+                <button onclick="openAddStudentForm()" id="ad">Add New Student</button>
+                <div class="student-list" id="studentList"></div>
+            </div>
+
+            <div class="popup" id="addStudentPopup">
+                <div class="popup-content">
+                    <span class="close" onclick="closeAddStudentForm()">&times;</span>
+                    <h2>Add Student</h2>
+                    <form id="addStudentForm" enctype="multipart/form-data">
+                        <label for="addName">Name:</label>
+                        <input type="text" id="addName" name="name" required>
+                        <label for="addRollNo">Roll No:</label>
+                        <input type="text" id="addRollNo" name="rollno" required>
+                        <label for="addPhone">Phone:</label>
+                        <input type="text" id="addPhone" name="phone" required>
+                        <label for="addAddress">Address:</label>
+                        <input type="text" id="addAddress" name="address" required>
+                        <label for="addImg">Image:</label>
+                        <input type="file" id="addImg" name="img">
+                        <button type="submit">Add Student</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="popup" id="editStudentPopup">
+                <div class="popup-content">
+                   
+                    <span class="close" onclick="hideEditForm()">&times;</span>
+                    <h2>Edit Student</h2>
+                    <form id="editStudentForm" enctype="multipart/form-data">
+                        <input type="hidden" id="editStudentId" name="id">
+                        <label for="editName">Name:</label>
+                        <input type="text" id="editName" name="name" required>
+                        <label for="editRollNo">Roll No:</label>
+                        <input type="text" id="editRollNo" name="rollno" required>
+                        <label for="editPhone">Phone:</label>
+                        <input type="text" id="editPhone" name="phone" required>
+                        <label for="editAddress">Address:</label>
+                        <input type="text" id="editAddress" name="address" required>
+                        <label for="editImg">Image:</label>
+                        <input type="file" id="editImg" name="img">
+                        <button type="submit">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    
+        <script src="script.js"></script>
+    
+        <script>
+            async function fetchTeacherDetails() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const teacherId = urlParams.get('id');
+    
+                if (!teacherId) {
+                    alert('No teacher ID provided');
+                    return;
+                }
+    
+                try {
+                    const response = await fetch(`http://localhost:3001/teachers/${teacherId}`);
+                    if (response.ok) {
+                        const teacher = await response.json();
+                        document.getElementById('teacherName').textContent = teacher.name;
+                        document.getElementById('teacherEmpId').textContent = teacher.empid;
+                        document.getElementById('teacherClass').textContent = teacher.cls_assign;
+                        document.getElementById('teacherPhone').textContent = teacher.phone;
+                        if (teacher.img) {
+                            document.getElementById('profile').src = teacher.img;
+                        } else {
+                            document.getElementById('profile').alt = 'No profile image';
+                        }
+                    } else {
+                        alert('Failed to load teacher details');
+                    }
+                } catch (error) {
+                    alert('An error occurred while fetching teacher details');
+                }
+            }
+    
+            async function loadStudentRolls() {
+                try {
+                    const response = await fetch('/student-rolls');
+                    const students = await response.json();
+                    const attendanceTable = document.getElementById('attendance-table');
+                    
+                    // Clear existing rows
+                    attendanceTable.innerHTML = '';
+                    
+                    students.forEach(student => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td id='ro'>${student.rollno}</td>
+                            <td>
+                                <select name="attendance" id="at">
+                                    <option value="Present">Present</option>
+                                    <option value="Absent">Absent</option>
+                                </select>
+                            </td>
+                        `;
+                        attendanceTable.appendChild(row);
+                    });
+                } catch (error) {
+                    console.error('Error fetching student roll numbers:', error);
+                }
+            }
+    
+            async function saveAttendance() {
+                const date = document.getElementById('date').value;
+                const attendanceRows = document.getElementById('at').value;
+                const ro = document.getElementById('ro').textContent;
+                const attendanceRecords = [];
+                attendanceRecords[0]=ro;
+                attendanceRecords[1]=attendanceRows;
+
+                console.log(attendanceRecords)
+    
+                try {
+                    const response = await fetch('/save-attendance', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ date, attendanceRecords })
+                    });
+    
+                    if (response.ok) {
+                        const result = await response.json();
+                        console.log('Attendance saved:', result);
+                        alert('Attendance saved successfully!');
+                    } else {
+                        throw new Error('Failed to save attendance');
+                    }
+                } catch (error) {
+                    console.error('Error saving attendance:', error);
+                    alert('Failed to save attendance');
+                }
+            }
+
+            async function loadStudentRolls() {
+                try {
+                    const response = await fetch('/student-rolls');
+                    const students = await response.json();
+                    const attendanceTable = document.getElementById('mark-table');
+                    
+                    // Clear existing rows
+                    attendanceTable.innerHTML = '';
+                    
+                    students.forEach(student => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td id='ro'>${student.rollno}</td>
+                            <td>
+                                <select name="attendance" id="at">
+                                    <option value="Present">Present</option>
+                                    <option value="Absent">Absent</option>
+                                </select>
+                            </td>
+                        `;
+                        attendanceTable.appendChild(row);
+                    });
+                } catch (error) {
+                    console.error('Error fetching student roll numbers:', error);
+                }
+            }
+    
+            async function loadStudentMarks() {
+                try {
+                    const response = await fetch('/student-marks');
+                    const marksData = await response.json();
+                    const marksTable = document.getElementById('marksTable');
+    
+                    // Clear existing rows
+                    marksTable.innerHTML = '';
+    
+                    marksData.forEach(data => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${data.rollno}</td>
+                            <td><input type="number" value="${data.mark}" data-rollno="${data.rollno}" class="mark-input"></td>
+                        `;
+                        marksTable.appendChild(row);
+                    });
+                } catch (error) {
+                    console.error('Error fetching student marks:', error);
+                }
+            }
+    
+            async function saveMarks() {
+                const examType = document.getElementById('examType').value;
+                const markInputs = document.querySelectorAll('.mark-input');
+                const marks = [];
+    
+                markInputs.forEach(input => {
+                    marks.push({
+                        rollno: input.getAttribute('data-rollno'),
+                        mark: input.value,
+                        type: examType
+                    });
+                });
+    
+                try {
+                    const response = await fetch('/save-marks', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ marks })
+                    });
+    
+                    if (response.ok) {
+                        const result = await response.json();
+                        console.log('Marks saved:', result);
+                        alert('Marks saved successfully!');
+                    } else {
+                        throw new Error('Failed to save marks');
+                    }
+                } catch (error) {
+                    console.error('Error saving marks:', error);
+                    alert('Failed to save marks');
+                }
+            }
+    
+            document.addEventListener('DOMContentLoaded', function () {
+                fetchTeacherDetails();
+                loadStudentRolls();
+                loadStudentMarks();
+    
+                document.getElementById('attendance-form').addEventListener('submit', function (event) {
+                    event.preventDefault();
+                    saveAttendance();
+                });
+    
+                document.getElementById('marksTable').addEventListener('change', function (event) {
+                    if (event.target.classList.contains('mark-input')) {
+                        saveMarks();
+                    }
+                });
+            });
+        </script>
+
+<script>
+    function toggleDivs() {
+        const parent1 = document.getElementById('parent1');
+        const parent2 = document.getElementById('parent2');
+
+        parent2.style.display = "flex";
+        parent1.style.display = "none";
+    }
+
+    function toggleDivs2() {
+        const parent1 = document.getElementById('parent1');
+        const parent3 = document.getElementById('parent3');
+
+        parent3.style.display = "flex";
+        parent1.style.display = "none";
+    }
+
+    function toggleDivs3() {
+        const parent1 = document.getElementById('parent1');
+        const parent4 = document.getElementById('parent4');
+
+        parent4.style.display = "flex";
+        parent1.style.display = "none";
+    }
+
+    function toggleDivs4() {
+        const parent1 = document.getElementById('parent1');
+        const parent5 = document.getElementById('parent5');
+
+        parent5.style.display = "flex";
+        parent1.style.display = "none";
+    }
+
+</script>
+
+    
+    </body>
+    
+    </html>
+    

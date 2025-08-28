@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="student.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Student</title>
+</head>
+
+<body>
+    <nav>
+        <img src="image-removebg-preview.png" id="logo" alt="Logo">
+        <p class="lo" style="font-size: 22px;">
+            <span style="color: crimson; font-size: 30px;">D</span>PS
+        </p>
+        <div class="nav-links">
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="gallery.html">ABOUT</a></li>
+                <li><a href="principal.html">CONTACT</a></li>
+            </ul>
+        </div>
+    </nav>
+    <section class="header">
+        <div class="event">
+            <h3>STUDENT DETAILS</h3>
+            <div class="text">
+                <img src="" id="profile" alt="Profile Image">
+                <div class="labels">
+                    <label for="name">Name: <span id="studentName"></span></label><br>
+                    <label for="rollno">Roll No: <span id="studentRollNo"></span></label><br>
+                    <label for="phone">Phone: <span id="studentPhone"></span></label><br>
+                    <label for="address">Address: <span id="studentAddress"></span></label>
+                </div>
+            </div>
+        </div>
+        <div class="parent" id="parent1">
+            <div class="det">
+                <div class="att" onclick="toggleDivs()">
+                    <div class="main-d">
+                        <p>Attendance Details</p>
+                        <img src="hand.png" alt="">
+                    </div>
+                    <div class="bottom">
+                        <p>More Info <i class="fa-solid fa-arrow-right"></i></p>
+                    </div>
+                </div>
+                <div class="mark" onclick="toggleDivs2()">
+                    <div class="main-d">
+                        <p>Marks</p>
+                        <img src="hat.png" alt="">
+                    </div>
+                    <div class="bottom">
+                        <p>More Info <i class="fa-solid fa-arrow-right"></i></p>
+
+                    </div>
+                </div>
+                <div class="ass" onclick="toggleDivs3()">
+                    <div class="main-d">
+                        <p>Assignment</p>
+                        <img src="book.png" alt="">
+                    </div>
+                    <div class="bottom">
+                        <p>More Info <i class="fa-solid fa-arrow-right"></i></p>
+                    </div>
+                </div>
+            </div>
+            <div class="tab">
+                <div class="timetable-container">
+                    <h2><i class="fa fa-calendar"></i> Today's Time Table</h2>
+                    <div class="dropdown">
+                        <select id="select-day">
+                            <option value="" disabled selected>Select Day</option>
+                            <option value="monday">Monday</option>
+                            <option value="tuesday">Tuesday</option>
+                            <option value="wednesday">Wednesday</option>
+                            <option value="thursday">Thursday</option>
+                            <option value="friday">Friday</option>
+                            <option value="saturday">Saturday</option>
+                        </select>
+                    </div>
+                    <table class="timetable">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Type</th>
+                                <th>From Time</th>
+                                <th>To Time</th>
+                                <th>Day</th>
+                                <th>Faculty</th>
+                                <th>Location</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>ISC</td>
+                                <td>Theory</td>
+                                <td>8:00 AM</td>
+                                <td>9:00 AM</td>
+                                <td>Thursday</td>
+                                <td>MR. ASHUTOSH MALLIK</td>
+                                <td>RDB-08</td>
+                            </tr>
+                            <tr>
+                                <td>OS</td>
+                                <td>Theory</td>
+                                <td>9:00 AM</td>
+                                <td>10:00 AM</td>
+                                <td>Thursday</td>
+                                <td>Mr. Santosh Kumar Panda</td>
+                                <td>RDB-08</td>
+                            </tr>
+                            <tr>
+                                <td>EEC</td>
+                                <td>Theory</td>
+                                <td>12:20 PM</td>
+                                <td>1:20 PM</td>
+                                <td>Thursday</td>
+                                <td>P. NARASIMHA MURTY</td>
+                                <td>RDB-08</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="parent attendance" id="parent2">
+            <div class="container">
+                <h1>View Your Attendance</h1>
+                <form id="view-attendance-form">
+                    <div class="at">
+                        <label for="rollNumber" style="margin:  0 20px 0 0;">Roll Number:</label>
+                        <label for="roll"><span id="rol"></span></label>
+                    </div>
+                </form>
+                <table id="attendance-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Attendance records will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="parent attendance" id="parent3">
+            <div id="marksDetails">
+                <h2 style="color: #fff; margin: 30px 0 0 0;">Marks Details</h2>
+                <table class="marks-table"
+                    style="border: 2px solid #fff; padding: 10px; margin: 30px 0 0 30px; border-radius: 20px;">
+                    <thead>
+                        <tr>
+                            <th style="padding: 20px; font-size: 23px; color: #fff;">Class Test</th>
+                            <th style="padding: 20px; font-size: 23px; color: #fff;">Cycle Test</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="classTestMarks"
+                                style="padding: 20px; font-size: 20px; color: #fff; background:  rgba(82, 81, 81, 0.537);">
+                                -</td>
+                            <td id="cycleTestMarks"
+                                style="padding: 20px; font-size: 20px; color: #fff; background:  rgba(82, 81, 81, 0.537);">
+                                -</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="parent attendance" id="parent4">
+            <h2>It is Assignment .</h2>
+        </div>
+
+
+    </section>
+
+    <script>
+        // Function to fetch and display student attendance
+        async function fetchStudentAttendance(rollNo) {
+            try {
+                const response = await fetch(`http://localhost:3001/attendance/${rollNo}`);
+                if (response.ok) {
+                    const attendanceRecords = await response.json();
+
+                    // Populate the attendance table with the fetched records
+                    const attendanceTableBody = document.querySelector('#attendance-table tbody');
+                    attendanceTableBody.innerHTML = ''; // Clear existing rows
+
+                    attendanceRecords.forEach(record => {
+                        const row = document.createElement('tr');
+
+                        const dateCell = document.createElement('td');
+                        dateCell.textContent = new Date(record.date).toLocaleDateString(); // Format the date
+
+                        const statusCell = document.createElement('td');
+                        statusCell.textContent = record.status;
+
+                        row.appendChild(dateCell);
+                        row.appendChild(statusCell);
+                        attendanceTableBody.appendChild(row);
+                    });
+                } else {
+                    alert('Failed to load attendance records');
+                }
+            } catch (error) {
+                alert('An error occurred while fetching attendance records');
+            }
+        }
+
+        // Modify the fetchStudentDetails function to include fetching attendance
+        async function fetchStudentDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const studentId = urlParams.get('id');
+
+            if (!studentId) {
+                alert('No student ID provided');
+                return;
+            }
+
+            try {
+                const response = await fetch(`http://localhost:3001/students/${studentId}`);
+                if (response.ok) {
+                    const student = await response.json();
+
+                    // Update student details on the page
+                    document.getElementById('studentName').textContent = student.name;
+                    document.getElementById('studentRollNo').textContent = student.rollno;
+                    document.getElementById('studentPhone').textContent = student.phone;
+                    document.getElementById('studentAddress').textContent = student.address;
+                    if (student.img) {
+                        document.getElementById('profile').src = student.img;
+                    } else {
+                        document.getElementById('profile').alt = 'No profile image';
+                    }
+
+                    // Fetch and display marks using the roll number
+                    fetchStudentMarks(student.rollno);
+
+                    // Fetch and display attendance using the roll number
+                    fetchStudentAttendance(student.rollno);
+
+                } else {
+                    alert('Failed to load student details');
+                }
+            } catch (error) {
+                alert('An error occurred while fetching student details');
+            }
+        }
+
+        // Execute fetchStudentDetails when the page loads
+        window.onload = fetchStudentDetails;
+
+
+        // Function to fetch student marks using the roll number
+        async function fetchStudentMarks(rollNo) {
+            try {
+                const response = await fetch(`http://localhost:3001/marks/${rollNo}`);
+                if (response.ok) {
+                    const marks = await response.json();
+
+                    // Update marks details on the page
+                    document.getElementById('classTestMarks').textContent = marks.classtest !== undefined ? marks.classtest : '-';
+                    document.getElementById('cycleTestMarks').textContent = marks.cycletest !== undefined ? marks.cycletest : '-';
+                } else {
+                    alert('Failed to load student marks');
+                }
+            } catch (error) {
+                alert('An error occurred while fetching student marks');
+            }
+        }
+
+        // Execute fetchStudentDetails when the page loads
+        window.onload = fetchStudentDetails;
+    </script>
+
+    <script>
+        function toggleDivs() {
+            const parent1 = document.getElementById('parent1');
+            const parent2 = document.getElementById('parent2');
+
+            parent2.style.display = "flex";
+            parent1.style.display = "none";
+            document.getElementById('rol').textContent = document.getElementById('studentRollNo').textContent;
+        }
+
+        function toggleDivs2() {
+            const parent1 = document.getElementById('parent1');
+            const parent3 = document.getElementById('parent3');
+
+            parent3.style.display = "flex";
+            parent1.style.display = "none";
+        }
+
+        function toggleDivs3() {
+            const parent1 = document.getElementById('parent1');
+            const parent4 = document.getElementById('parent4');
+
+            parent4.style.display = "flex";
+            parent1.style.display = "none";
+        }
+
+    </script>
+</body>
+
+</html>

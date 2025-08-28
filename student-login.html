@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login</title>
+    <link rel="stylesheet" href="student-login.css">
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h1>Student Login</h1>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginName">Name:</label>
+                    <input type="text" id="loginName" name="name" required>
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="form-group">
+                    <label for="loginRollNo">Roll No:</label>
+                    <input type="text" id="loginRollNo" name="rollno" required>
+                    <i class="fas fa-id-card"></i>
+                </div>
+                <div class="form-group captcha-group">
+                    <img id="captcha" alt="Captcha Code">
+                    <input type="text" placeholder="Captcha Code" id="captchaInput" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <div id="error-message" style="color: red;"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Array of captcha objects with image src and correct code
+            const captchas = [
+                { src: 'capcha1.png', code: 'WX8K' },
+                { src: 'capcha2.png', code: 'HP3E' },
+                { src: 'capcha3.png', code: '4MM8' },
+            ];
+
+            // Select a random captcha
+            const selectedCaptcha = captchas[Math.floor(Math.random() * captchas.length)];
+
+            // Set the captcha image and store the correct code
+            const captchaImage = document.getElementById('captcha');
+            captchaImage.src = selectedCaptcha.src;
+            captchaImage.dataset.captcha = selectedCaptcha.code; // Store correct code in a data attribute
+
+            // Set up an event listener for the form submission
+            document.getElementById('loginForm').addEventListener('submit', async function (event) {
+                event.preventDefault();
+
+                const name = document.getElementById('loginName').value;
+                const rollno = document.getElementById('loginRollNo').value;
+                const captchaInput = document.getElementById('captchaInput').value;
+                const errorMessage = document.getElementById('error-message');
+
+                // Get the correct captcha value from the data attribute of the image
+                const captchaCorrect = captchaImage.dataset.captcha;
+
+                // Check if the entered captcha matches the correct one
+                if (captchaInput !== captchaCorrect) {
+                    errorMessage.textContent = 'Captcha code is incorrect. Please try again.';
+                    return;
+                }
+
+                // Proceed with form submission if captcha is correct
+                try {
+                    const response = await fetch('http://localhost:3001/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ name, rollno })
+                    });
+
+                    if (response.ok) {
+                        const student = await response.json();
+                        // Redirect to student.html with the student ID as a query parameter
+                        window.location.href = `student.html?id=${student._id}`;
+                    } else {
+                        const errorData = await response.json();
+                        errorMessage.textContent = errorData.error || 'Invalid login credentials';
+                    }
+                } catch (error) {
+                    errorMessage.textContent = 'An error occurred. Please try again later.';
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>
