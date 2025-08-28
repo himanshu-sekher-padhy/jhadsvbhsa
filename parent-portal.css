@@ -1,0 +1,106 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('WhatsApp Image 2024-05-25 at 09.11.54_47d9f719.jpg');
+    background-size: cover;
+    font-family: Arial, sans-serif;
+}
+
+.portal-container {
+    display: flex;
+    gap: 2rem;
+}
+
+.login-box, .signup-box {
+    background: white;
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: aqua;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #000;
+}
+
+.form-group input {
+    width: calc(100% - 2.5rem);
+    padding: 0.5rem;
+    padding-left: 2.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-group i {
+    position: absolute;
+    left: 0.75rem;
+    margin-top: -22px;
+    color: aqua;
+}
+
+.captcha-group {
+    display: flex;
+    align-items: center;
+}
+
+.captcha-group img {
+    height: 50px;
+    margin-right: 1rem;
+}
+
+button {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 5px;
+    background: #007bff;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+#error-message {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+#div2 {
+    display: none;
+}
+
+.up {
+    margin-top: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.up a {
+    color: #000;
+}
+
+.up:hover {
+    color: #007bff;
+}
